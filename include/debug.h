@@ -23,15 +23,18 @@
 
 typedef enum
 {
-	LOG_INFO,
-	LOG_DEBUG,
-	LOG_WARN,
-	LOG_ERR,
-	LOG_FATAL
+    LOG_INFO,
+    LOG_DEBUG,
+    LOG_WARN,
+    LOG_ERR,
+    LOG_FATAL
 } log_level_t;
 
 
-void do_debug(log_level_t level, const char *fmt, ...);
+#define do_debug(level, ...) \
+	_do_debug(level, __FILE__, __LINE__, __VA_ARGS__)
+
+void _do_debug(log_level_t level, const char *file, int line, const char *fmt, ...);
 
 
 #endif
